@@ -4,19 +4,19 @@
 ## object that can cache its inverse
 
 makeCacheMatrix <- function(x = matrix()) {
-  m <- NULL
+  i <- NULL
   set <- function(y){
     x <<- y
-    m <<- NULL
+    i <<- NULL
   }
   get <- function() x
-  setmean <- function(mean) m <<- mean
-  getmean <- function() m
+  setInverse <- function(inverse) i <<- inverse
+  getInverse <- function() i
   
   ## list the results of this function
   list(set = set, get = get,    
-       setmean = setmean,
-       getmean = getmean)
+       setInverse = setInverse,
+       getInverse = getInverse)
 
 }
 
@@ -26,19 +26,19 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, ...) {
   ## Return a matrix that is the inverse of 'x'
-  m <- x$getmean()
+  i <- x$getInverse()
   
   ## if inverse has already been calculated
   ## return the cached mean
-  if(!is.null(m)) {
+  if(!is.null(i)) {
     message("getting cached data")
-    return (m)
+    return (i)
   }
   
   ## calculate the inverse of the matrix
   ## if it is the first time to calculate
   data <- x$get()
-  m <- solve(data, ...)
-  x$setmean(m)
-  m
+  i <- solve(data, ...)
+  x$setInverse(m)
+  i
 }
