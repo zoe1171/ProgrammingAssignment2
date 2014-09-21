@@ -39,6 +39,6 @@ cacheSolve <- function(x, ...) {
   ## if it is the first time to calculate
   data <- x$get()
   i <- solve(data, ...)
-  x$setInverse(m)
+  x$setInverse(i)
   i
 }
